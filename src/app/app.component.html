@@ -1,9 +1,11 @@
-<div *ngIf="ofAuth.user | async as user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
+<div *ngIf="user && !loading; else showLogin">
+  <h1>Hello {{ user.email }}!</h1>
   <button (click)="logout()">Logout</button>
 </div>
 
 <ng-template #showLogin>
-  <app-login></app-login>
-  
+  <div *ngIf="loading">
+    cargando...
+  </div>
+  <app-login *ngIf="!loading"></app-login>  
 </ng-template>
